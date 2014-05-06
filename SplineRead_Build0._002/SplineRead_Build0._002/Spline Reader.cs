@@ -13,7 +13,7 @@ using System.IO;
 //by ATAG_Marmus 
 //
 //Build v0.5 May 5, 2014
-//
+//----Rev v0.5.1 May 6, 2014 - fixed clear textbox screen, added static parse of 0 or 1 DefPoint value to parse roads from outlines, other misc changes
 //
 namespace SplineRead_Build0._002
 {
@@ -30,7 +30,9 @@ namespace SplineRead_Build0._002
         {
             ofd.ShowDialog();
             //BinaryReader br = new BinaryReader(File.OpenRead(ofd.FileName));
-
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
             FileStream headerin = new FileStream((ofd.FileName), FileMode.Open,
             FileAccess.Read, FileShare.ReadWrite);
             //Create a BinaryReader from the FileStream
@@ -45,7 +47,7 @@ namespace SplineRead_Build0._002
             int UnknownHdr04 = br.ReadInt32();
             int UnknownHdr05 = br.ReadInt32();
             int NumSplines = br.ReadInt32();
-            //Display the data on the console
+            //Display the data on the console            
             textBox1.AppendText("File Header: \t\t" + Header.ToString() + "\r\n");
             textBox1.AppendText("Unknown Header 01: \t" + UnknownHdr01.ToString() + "\r\n");            
             textBox1.AppendText("Unknown Header 02 :\t" + UnknownHdr02 + "\r\n");
@@ -92,7 +94,7 @@ namespace SplineRead_Build0._002
             textBox2.AppendText("[splines]\r\n");
             for (int i = 0; i <= counter; i++)
             {
-                textBox1.AppendText("File Position" + pos + "\r\n");
+                //textBox1.AppendText("File Position" + pos + "\r\n");
                 br2.BaseStream.Seek(pos, SeekOrigin.Begin);
                 int DefPoints = br2.ReadInt32();
                 int UnknownData01 = br2.ReadInt32();
@@ -112,9 +114,15 @@ namespace SplineRead_Build0._002
                 //float Xpn = br2.ReadSingle();
                 //int pass = i;
                 //textBox2.Text = "Pass" + i;
+                
+                if (DefPoints == 0) //0 for Roads/Tracks/Rivers   1 for layout outlines
+                {
+
+
+                
                 progressBar2.PerformStep();
 
-
+                textBox1.AppendText("File Position" + pos + "\r\n");
                 //Display the data on the textBox1  
                 textBox1.AppendText("     \r\n");
                 textBox1.AppendText("Spline \t\t\t" + "no." + (i + 1) + "\r\n");
@@ -203,7 +211,7 @@ namespace SplineRead_Build0._002
                     }
                     else
                     {
-                        textBox3.AppendText("R" + XRn + " ");
+                        textBox3.AppendText("R " + XRn + " ");
                         textBox3.AppendText(YRn + " 20.00 -1\r\n");
                     }
                     
@@ -230,6 +238,12 @@ namespace SplineRead_Build0._002
                 
                 pos = pos + 32 + (48 + (splineLength - 1) * (24));
                 
+            }   //DefPoints loop
+            else
+            {
+                pos = pos + 32 + (48 + (splineLength - 1) * (24));
+            }
+
             }
 
 
