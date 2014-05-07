@@ -88,7 +88,7 @@ namespace SplineRead_Build0._002
             BinaryReader br2 = new BinaryReader(fin);
             //Seek to the start of the file
             //attempt to add a loop
-            int counter = NumSplines - 1;
+            int counter = 100;  //         <<<------changing to get smaller chunks of data out original line is: int counter = NumSplines - 1;
             int pos = 28; //position of first spline
             
             textBox2.AppendText("[splines]\r\n");
@@ -115,7 +115,7 @@ namespace SplineRead_Build0._002
                 //int pass = i;
                 //textBox2.Text = "Pass" + i;
                 
-                if (DefPoints == 0) //0 for Roads/Tracks/Rivers   1 for layout outlines
+                if (DefPoints == 0) //0 for Roads/Tracks/Rivers   1 for layout outlines   <<<<<-------change value to print out roads/trains or layout outlines
                 {
 
 
