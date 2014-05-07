@@ -88,7 +88,7 @@ namespace SplineRead_Build0._002
             BinaryReader br2 = new BinaryReader(fin);
             //Seek to the start of the file
             //attempt to add a loop
-            int counter = 100;  //         <<<------changing to get smaller chunks of data out original line is: int counter = NumSplines - 1;
+            int counter = 5000;  //         <<<------changing to get smaller chunks of data out original line is: int counter = NumSplines - 1;
             int pos = 28; //position of first spline
             
             textBox2.AppendText("[splines]\r\n");
@@ -115,7 +115,7 @@ namespace SplineRead_Build0._002
                 //int pass = i;
                 //textBox2.Text = "Pass" + i;
                 
-                if (DefPoints == 0) //0 for Roads/Tracks/Rivers   1 for layout outlines   <<<<<-------change value to print out roads/trains or layout outlines
+                if (DefPoints == 1) //0 for Roads/Tracks/Rivers   1 for layout outlines   <<<<<-------change value to print out roads/trains or layout outlines
                 {
 
 
@@ -136,7 +136,9 @@ namespace SplineRead_Build0._002
                 textBox1.AppendText("Spline Length :\t\t" + splineLength + "\r\n");
                 //start double
                 // below used to list coordinates
+                textBox1.AppendText("-------------------------------------------------------------------------------------------------------------------------------------------------------\r\n");
                 textBox1.AppendText("     \r\n");
+                /*
                 textBox1.AppendText(" Origin Coordinates (Global)\r\n");
                 textBox1.AppendText("Origin X-Coord :\t" + Xp_Origin + "\r\n");
                 textBox1.AppendText("Origin Y-Coord :\t" + Yp_Origin + "\r\n");
@@ -144,7 +146,7 @@ namespace SplineRead_Build0._002
                 textBox1.AppendText("Origin yL-Coord :\t" + yL_Origin + "\r\n");
                 textBox1.AppendText("Origin xR-Coord :\t" + xR_Origin + "\r\n");
                 textBox1.AppendText("Origin yR-Coord :\t" + yR_Origin + "\r\n");
-                
+                */
                 //following is to get into FMB spline format
                 //
                 //textBox1.AppendText("\r\n");
@@ -165,38 +167,38 @@ namespace SplineRead_Build0._002
                 
 
 
-
-                textBox1.AppendText("     \r\n");
-                textBox1.AppendText("Control Points (Local Coordinates) :\r\n");
+                
+                //textBox1.AppendText("     \r\n");
+                //textBox1.AppendText("Control Points (Local Coordinates) :\r\n");
                 int jpos = (splineLength - 1);
                 for (int j = 1; j <= jpos; j++)
                 {
-                    textBox1.AppendText("     \r\n");
-                    textBox1.AppendText("Control Point " + (j + 1) + " :\r\n");
+                    //textBox1.AppendText("     \r\n");
+                    //textBox1.AppendText("Control Point " + (j + 1) + " :\r\n");
 
                     float XpnLocal = br2.ReadSingle();
                     double Xpn = Math.Round((Xp_Origin + XpnLocal), 2);
-                    textBox1.AppendText("Xp" + (j + 1) + " :" + XpnLocal + "\r\n");
+                    //textBox1.AppendText("Xp" + (j + 1) + " :" + XpnLocal + "\r\n");
 
                     float YpnLocal = br2.ReadSingle();
                     double Ypn = Math.Round((Yp_Origin + YpnLocal), 2);
-                    textBox1.AppendText("Yp" + (j + 1) + " :" + YpnLocal + "\r\n");
+                    //textBox1.AppendText("Yp" + (j + 1) + " :" + YpnLocal + "\r\n");
 
                     float XLnLocal = br2.ReadSingle();
                     double XLn = Math.Round((xL_Origin + XLnLocal), 2);
-                    textBox1.AppendText("xL" + (j + 1) + " :" + XLnLocal + "\r\n");
+                    //textBox1.AppendText("xL" + (j + 1) + " :" + XLnLocal + "\r\n");
 
                     float YLnLocal = br2.ReadSingle();
                     double YLn = Math.Round((yL_Origin + YLnLocal), 2);
-                    textBox1.AppendText("yL" + (j + 1) + " :" + YLnLocal + "\r\n");
+                    //textBox1.AppendText("yL" + (j + 1) + " :" + YLnLocal + "\r\n");
 
                     float XRnLocal = br2.ReadSingle();
                     double XRn = Math.Round((xR_Origin + XRnLocal), 2);
-                    textBox1.AppendText("xR" + (j + 1) + " :" + XRnLocal + "\r\n");
+                    //textBox1.AppendText("xR" + (j + 1) + " :" + XRnLocal + "\r\n");
 
                     float YRnLocal = br2.ReadSingle();
                     double YRn = Math.Round((yR_Origin + YRnLocal), 2);
-                    textBox1.AppendText("yR" + (j + 1) + " :" + YRnLocal + "\r\n");
+                    //textBox1.AppendText("yR" + (j + 1) + " :" + YRnLocal + "\r\n");
                     //
                     //below is to get all control points into FMB spline format
                     //
@@ -231,8 +233,8 @@ namespace SplineRead_Build0._002
                 }
                 //
                 
-                textBox1.AppendText("-------------------------------------------------------------------------------------------------------------------------------------------------------\r\n");
-                textBox1.AppendText("\r\n");
+                //textBox1.AppendText("-------------------------------------------------------------------------------------------------------------------------------------------------------\r\n");
+                //textBox1.AppendText("\r\n");
                 
                 //advance psition pos to end of string with splineLength value
                 
